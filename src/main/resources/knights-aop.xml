@@ -19,15 +19,18 @@
 
 	<bean id="minstrel" class="com.springinaction.knights.Minstrel" /> <!--<co id="co_minstrel_bean"/> -->
 
-	<aop:config>
+	<context:component-scan base-package="com.springinaction.knights">
+	</context:component-scan>
+	<aop:aspectj-autoproxy/>
+
+	<!-- >aop:config>
 		<aop:aspect ref="minstrel">
 
-			<aop:pointcut id="embark" expression="execution(* *.embarkOnQuest(..))" /> <!--<co id="co_define_pointcut"/> -->
+			<aop:pointcut id="embark" expression="execution(* *.embarkOnQuest(..))" />
 
-			<aop:before pointcut-ref="embark" method="singBeforeQuest" />    <!--<co id="co_minstrel_before_advice"/> -->
+			<aop:before pointcut-ref="embark" method="singBeforeQuest" />   
 
-			<aop:after pointcut-ref="embark" method="singAfterQuest" />     <!--<co id="co_minstrel_after_advice"/> -->
-
+			<aop:after pointcut-ref="embark" method="singAfterQuest" /> 
 		</aop:aspect>
-	</aop:config>
+	</aop:config -->
 </beans>

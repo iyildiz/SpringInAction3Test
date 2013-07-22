@@ -13,4 +13,8 @@ public class BraveKnight implements Knight {
 	public void embarkOnQuest() throws QuestException {
 		quest.embark();
 	}
+
+	public void setQuest(Quest quest) {
+		this.quest = quest;
+	}
 }

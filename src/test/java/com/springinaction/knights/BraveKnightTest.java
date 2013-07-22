@@ -10,7 +10,7 @@ public class BraveKnightTest {
     Quest mockQuest = mock(Quest.class);     //<co id="co_createMockQuest"/>
     
     BraveKnight knight = new BraveKnight(); //<co id="co_injectMockQuest"/>
-    //knight.setQuest(mockQuest);
+    knight.setQuest(mockQuest);
     knight.embarkOnQuest();
     
     verify(mockQuest, times(1)).embark();
