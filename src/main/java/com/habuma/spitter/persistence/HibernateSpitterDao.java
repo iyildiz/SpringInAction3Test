@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.habuma.spitter.domain.Spitter;
 import com.habuma.spitter.domain.Spittle;
 
-@Repository
 public class HibernateSpitterDao implements SpitterDao {
 
 	private SessionFactory sessionFactory;
