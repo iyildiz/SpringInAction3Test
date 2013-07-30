@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+     http://www.springframework.org/schema/beans/spring-beans.xsd
+     http://www.springframework.org/schema/context 
+     http://www.springframework.org/schema/context/spring-context.xsd 
+ 	 http://www.springframework.org/schema/tx 
+     http://www.springframework.org/schema/tx/spring-tx-3.0.xsd     
+     http://www.springframework.org/schema/aop
+     http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<context:component-scan base-package="com.habuma.spitter">
+	</context:component-scan>
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<!-- (this dependency is defined somewhere else) -->
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost/spitter" />
+		<property name="username" value="sia3" />
+		<property name="password" value="sia3" />
+	</bean>
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="annotatedClasses">
+			<list>
+				<value>com.habuma.spitter.domain.Spitter</value>
+				<value>com.habuma.spitter.domain.Spittle</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="dialect">
+					org.hibernate.dialect.MySQLDialect
+				</prop>
+				<prop key="hibernate.show_sql">true</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="hibernateSpitterDao" class="com.habuma.spitter.persistence.HibernateSpitterDao">
+		<constructor-arg ref="sessionFactory" />
+	</bean>
+
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.simple.SimpleJdbcTemplate">
+		<constructor-arg ref="dataSource" />
+	</bean>
+
+	<bean
+		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+</beans>

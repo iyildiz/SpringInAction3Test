@@ -8,8 +8,19 @@
      http://www.springframework.org/schema/context/spring-context.xsd 
      http://www.springframework.org/schema/aop
      http://www.springframework.org/schema/aop/spring-aop.xsd">
-	
-	<context:component-scan base-package="com.springinaction.knights">
+
+	<context:component-scan base-package="com.habuma.spitter">
 	</context:component-scan>
 
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost/spitter" />
+		<property name="username" value="sia3" />
+		<property name="password" value="sia3" />
+	</bean>
+	<bean id="jdbcTemplate"
+		class="org.springframework.jdbc.core.simple.SimpleJdbcTemplate">
+		<constructor-arg ref = "dataSource" />
+	</bean>
 </beans>
