@@ -27,4 +27,9 @@ public class JpaSpitterDaoTest {
 		
 		assertEquals("2", spitter2.getId().toString());
 	}
+	
+	@Test
+	public void emptyTest() throws Exception {
+		
+	}	
 }
